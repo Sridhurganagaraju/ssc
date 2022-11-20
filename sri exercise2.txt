@@ -1,0 +1,191 @@
+
+SQL> create table emp12 (empno numeric(6), ename varchar2(20) NOT NULL, job varchar2(10) NOT NULL,deptno numeric(3), sal numeric(7,2));
+
+Table created.
+
+SQL> desc emp12;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                              NUMBER(6)
+ ENAME                                     NOT NULL VARCHAR2(20)
+ JOB                                       NOT NULL VARCHAR2(10)
+ DEPTNO                                             NUMBER(3)
+ SAL                                                NUMBER(7,2)
+
+SQL> Alter table emp12 ADD experience numeric(3);
+
+Table altered.
+
+SQL> desc emp12;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                              NUMBER(6)
+ ENAME                                     NOT NULL VARCHAR2(20)
+ JOB                                       NOT NULL VARCHAR2(10)
+ DEPTNO                                             NUMBER(3)
+ SAL                                                NUMBER(7,2)
+ EXPERIENCE                                         NUMBER(3)
+
+
+SQL> create table dept2 (deptno numeric(3) NOT NULL, name varchar2(10) NOT NULL, loc varchar2(10) NOT NULL, PRIMARY KEY(deptno));
+
+Table created.
+
+SQL> desc dept2;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPTNO                                    NOT NULL NUMBER(3)
+ NAME                                      NOT NULL VARCHAR2(10)
+ LOC                                       NOT NULL VARCHAR2(10)
+
+
+SQL>  CREATE table emp13 (empno numeric(3) CHECK (empno>100), ename varchar2(25));
+
+Table created.
+
+SQL> desc emp13;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                              NUMBER(3)
+ ENAME                                              VARCHAR2(25)
+
+SQL> insert into emp13 (empno, ename) values (90, 'siva');
+insert into emp13 (empno, ename) values (90, 'siva')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.SYS_C007040) violated
+
+
+SQL> insert into emp1 (empno, ename) values (101, 'siva');
+
+1 row created.
+
+SQL> row will be inserted as empno satisfies the constraint.
+SP2-0734: unknown command beginning "row will b..." - rest of line ignored
+
+
+SQL> CREATE table student1 ( regno numeric(6), mark numeric(3) CHECK (mark >=0 and mark <=100));
+
+Table created.
+
+SQL> desc student1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                              NUMBER(6)
+ MARK                                               NUMBER(3)
+
+SQL> Insert into student1 (regno, mark) values (101, -10);
+Insert into student1 (regno, mark) values (101, -10)
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.SYS_C007041) violated
+
+
+SQL> Insert into student (regno, mark) values (101, 101);
+Insert into student (regno, mark) values (101, 101)
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.SYS_C007007) violated
+
+
+SQL> Insert into student1 (regno, mark) values (101, 50);
+
+1 row created.
+
+SQL> desc student1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                              NUMBER(6)
+ MARK                                               NUMBER(3)
+
+SQL> ALTER TABLE student1 ADD CONSTRAINT rno CHECK (LENGTHB(regno)<=4);
+
+Table altered.
+
+SQL> desc student1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                              NUMBER(6)
+ MARK                                               NUMBER(3)
+
+SQL> Insert into student1 (regno, mark) values (192101, 50);
+Insert into student1 (regno, mark) values (192101, 50)
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.RNO) violated
+
+
+SQL> CREATE TABLE cust(custid numeric(6) NOT NULL, name char(10));
+CREATE TABLE cust(custid numeric(6) NOT NULL, name char(10))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> CREATE TABLE cust1(custid numeric(6) NOT NULL, name char(10));
+
+Table created.
+
+SQL> desc cust1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTID                                    NOT NULL NUMBER(6)
+ NAME                                               CHAR(10)
+
+SQL> insert into cust (custid, name) values (101, NULL);
+
+1 row created.
+
+SQL> desc cust1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTID                                    NOT NULL NUMBER(6)
+ NAME                                               CHAR(10)
+
+SQL> ALTER TABLE cust1 MODIFY NAME char(10) NOT NULL;
+
+Table altered.
+
+SQL> desc cust1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTID                                    NOT NULL NUMBER(6)
+ NAME                                      NOT NULL CHAR(10)
+
+SQL> ALTER TABLE cust1 MODIFY NAME char(10) NOT NULL;
+ALTER TABLE cust1 MODIFY NAME char(10) NOT NULL
+                         *
+ERROR at line 1:
+ORA-01442: column to be modified to NOT NULL is already NOT NULL
+
+SQL> insert into cust1 (sustid, name) values (101, NULL);
+insert into cust1 (sustid, name) values (101, NULL)
+                   *
+ERROR at line 1:
+ORA-00904: "SUSTID": invalid identifier
+
+
+SQL> insert into cust (sustid, name) values (101, NULL);
+insert into cust (sustid, name) values (101, NULL)
+                  *
+
+SQL> CREATE TABLE cust2(custid numeric(6) NOT NULL, name char(10));
+
+Table created.
+
+SQL> desc cust2;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTID                                    NOT NULL NUMBER(6)
+ NAME                                               CHAR(10)
+
+
+SQL> CREATE TABLE stud(regno numeric(6) NOT NULL, name char(10), PRIMARY KEY(regno));
+
+Table created.
+
+SQL> desc stud;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                     NOT NULL NUMBER(6)
+ NAME                                               CHAR(10)
