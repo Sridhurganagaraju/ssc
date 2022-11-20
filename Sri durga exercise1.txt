@@ -1,0 +1,112 @@
+SQL> create table emp5(eno number(4), name varchar(10));
+
+Table created.
+
+SQL> desc emp5;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                                NUMBER(4)
+ NAME                                               VARCHAR2(10)
+
+SQL> Alter table emp ADD sal numeric(7,2) NOT NULL;
+
+Table altered.
+
+SQL> desc emp5;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                                NUMBER(4)
+ NAME                                               VARCHAR2(10)
+
+SQL>  Alter table emp5 ADD sal numeric(7,2) NOT NULL;
+
+Table altered.
+
+SQL> desc emp5;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                                NUMBER(4)
+ NAME                                               VARCHAR2(10)
+ SAL                                       NOT NULL NUMBER(7,2)
+
+SQL> Alter table emp5 DROP COLUMN sal;
+
+Table altered.
+
+SQL> desc emp5
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                                NUMBER(4)
+ NAME                                               VARCHAR2(10)
+
+SQL> Alter table emp5 MODIFY name VARCHAR2(10);
+
+Table altered.
+
+SQL> desc emp5
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                                NUMBER(4)
+ NAME                                               VARCHAR2(10)
+
+SQL> Insert into emp5( eno, name )values (101, 'sri' );
+
+1 row created.
+
+SQL> desc emp5
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                                NUMBER(4)
+ NAME                                               VARCHAR2(10)         
+  SQL> desc emp5  
+
+SQL>  Insert into emp5( eno, name )values (102, 'rakshi' );
+
+1 row created.
+
+SQL> desc emp5
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                                NUMBER(4)
+ NAME                                               VARCHAR2(10)
+
+SQL>  Insert into emp5( eno, name )values (103, 'gnaps' );
+
+1 row created.
+
+SQL> desc emp5
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                                NUMBER(4)
+ NAME                                               VARCHAR2(10)
+
+SQL> select * from emp5;
+
+       ENO NAME
+---------- ----------
+       101 sri
+       102 rakshi
+       103 gnaps
+
+SQL> Truncate table emp5;
+
+Table truncated.
+
+SQL> desc emp5
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                                NUMBER(4)
+ NAME                                               VARCHAR2(10)
+
+SQL> DROP table emp5;
+
+Table dropped.
+
+SQL> select * from emp5;
+select * from emp5
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+
